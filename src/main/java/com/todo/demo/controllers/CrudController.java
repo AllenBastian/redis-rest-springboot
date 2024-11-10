@@ -30,25 +30,25 @@ public class CrudController {
     }
 
     @PostMapping("/add")
-    public String addTodo(@RequestBody TodoList todo){
+    public ResponseEntity<TodoList> addTodo(@RequestBody TodoList todo){
         System.out.println(todo.getTodoList());
-        crudService.addTodoList(todo.getTodoList());
-        return "successfully added the list";
+        TodoList mytodo = crudService.addTodoList(todo.getTodoList());
+        return ResponseEntity.status(HttpStatus.CREATED).body(mytodo);
     }
 
 
     @PutMapping("/update/{id}")
-    public String updateTodo(@PathVariable Long id,@RequestBody TodoList todoList){
+    public ResponseEntity<TodoList> updateTodo(@PathVariable Long id,@RequestBody TodoList todoList){
         System.out.println(id);
         crudService.updateTodoList(id,todoList.getTodoList());
-        return "success";
+        return ResponseEntity.status(HttpStatus.OK).body(todoList);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public String deleteTodo(@PathVariable Long id){
+    public ResponseEntity<TodoList> deleteTodo(@PathVariable Long id){
             crudService.deleteTodoList(id);
-            return "success";
+            return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 
