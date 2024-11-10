@@ -1,4 +1,4 @@
-package com.todo.demo.controller;
+package com.todo.demo.controllers;
 
 
 import org.springframework.web.bind.annotation.*;
