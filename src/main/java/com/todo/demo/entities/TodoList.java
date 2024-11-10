@@ -17,10 +17,6 @@ public class TodoList {
 
     public TodoList(){}
 
-    public TodoList(Long id,String todoList){
-        this.id = id;
-        this.todoList = todoList;
-    }
 
 
     public void setTodoList(String todoList) {
