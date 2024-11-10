@@ -6,6 +6,8 @@ import com.todo.demo.services.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/todo")
 public class CrudController {
@@ -20,8 +22,8 @@ public class CrudController {
 
 
     @GetMapping("/get-all")
-    public String getAllTodos(){
-        return "hello checkinsssgss";
+    public List<TodoList> getAllTodos(){
+        return crudService.getAllTodoLists();
     }
 
     @PostMapping("/add")
@@ -30,12 +32,22 @@ public class CrudController {
         crudService.addTodoList(todo.getTodoList());
         return "successfully added the list";
     }
-//
-//
-//    @DeleteMapping("/delete/{id}")
-//    public String deleteTodo(){
-//        return "deleted";
-//    }
+
+
+    @PutMapping("/update/{id}")
+    public String updateTodo(@PathVariable Long id,@RequestBody TodoList todoList){
+        crudService.updateTodoList(id,todoList.getTodoList());
+        return "success";
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteTodo(@PathVariable Long id){
+            crudService.deleteTodoList(id);
+            return "success";
+    }
+
+
 
 
 }
