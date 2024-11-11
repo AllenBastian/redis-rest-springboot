@@ -2,6 +2,9 @@ package com.todo.demo.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class User {
 
@@ -14,6 +17,10 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user" )
+    private List<TodoList> todos = new ArrayList<>();
+
 
     public User(){}
 
