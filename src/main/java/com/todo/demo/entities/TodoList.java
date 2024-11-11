@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -18,6 +20,7 @@ public class TodoList {
 
     @NotNull(message = "todolist should not be null")
     @NotBlank(message = "todolist cannot be blank")
+    @Size(min=0,max=50,message = "todolist size must be between 0 and 50 characters")
     private String todoList;
 
 

@@ -18,8 +18,9 @@ public class ControllerAdvisor {
     public ResponseEntity<ApiResponse<String>> handleConstraintViolationException(ConstraintViolationException exception){
 
         String errorMessage = new ArrayList<>(exception.getConstraintViolations()).getFirst().getMessage();
-        ApiResponse<String> myResponse = new ApiResponse<>("error",errorMessage);
+        ApiResponse<String> myResponse = new ApiResponse<>("constraint validation error",errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);
 
     }
+
 }
