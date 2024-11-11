@@ -2,13 +2,16 @@ package com.todo.demo.controllers;
 
 
 import com.todo.demo.entities.TodoList;
+import com.todo.demo.http.response.ApiResponse;
 import com.todo.demo.services.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/todo")
@@ -24,9 +27,11 @@ public class CrudController {
 
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<TodoList>> getAllTodos(){
+    public ResponseEntity<ApiResponse<List<TodoList>>>getAllTodos(){
+
         List<TodoList>myTodo = crudService.getAllTodoLists();
-        return ResponseEntity.status(HttpStatus.OK).body(myTodo);
+        ApiResponse<List<TodoList>> myResponse = new ApiResponse<>("success",myTodo);
+        return ResponseEntity.status(HttpStatus.OK).body(myResponse);
     }
 
     @PostMapping("/add")
