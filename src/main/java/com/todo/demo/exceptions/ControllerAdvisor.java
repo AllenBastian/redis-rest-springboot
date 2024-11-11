@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 
+
+/*controller Advice annotation has a global scope. exception handlers in this class
+applies to all controllers globally*/
 @ControllerAdvice
 public class ControllerAdvisor {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiResponse<String>> handleConstraintViolationException(ConstraintViolationException exception){
 
+        //converts set of errors received from exception into array to get the first error
         String errorMessage = new ArrayList<>(exception.getConstraintViolations()).getFirst().getMessage();
         ApiResponse<String> myResponse = new ApiResponse<>("constraint validation error",errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);
