@@ -35,25 +35,29 @@ public class CrudController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<TodoList> addTodo(@RequestBody TodoList todo){
+    public ResponseEntity<ApiResponse<Void>> addTodo(@RequestBody TodoList todo){
         System.out.println(todo.getTodoList());
-        TodoList mytodo = crudService.addTodoList(todo.getTodoList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(mytodo);
+        crudService.addTodoList(todo.getTodoList());
+        ApiResponse<Void> myResponse = new ApiResponse<>("success");
+        return ResponseEntity.status(HttpStatus.CREATED).body(myResponse);
     }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<TodoList> updateTodo(@PathVariable Long id,@RequestBody TodoList todoList){
+    public ResponseEntity<ApiResponse<Void>> updateTodo(@PathVariable Long id,@RequestBody TodoList todoList){
         System.out.println(id);
         crudService.updateTodoList(id,todoList.getTodoList());
-        return ResponseEntity.status(HttpStatus.OK).body(todoList);
+        ApiResponse<Void> myResponse = new ApiResponse<>("success");
+        return ResponseEntity.status(HttpStatus.OK).body(myResponse);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TodoList> deleteTodo(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<Void>> deleteTodo(@PathVariable Long id){
             crudService.deleteTodoList(id);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            ApiResponse<Void> myResponse = new ApiResponse<>("success");
+            return ResponseEntity.status(HttpStatus.OK).body(myResponse);
+
     }
 
 
