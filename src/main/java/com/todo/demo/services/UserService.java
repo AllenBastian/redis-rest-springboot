@@ -27,10 +27,8 @@ public class UserService {
     public User createUser(User user){
 
         Ulid ulid = UlidCreator.getUlid();
-        Map encoders = new HashMap<>();
-        encoders.put("bcrypt",new BCryptPasswordEncoder());
-        PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("bcrypt",encoders);
-        System.out.println(passwordEncoder.encode("allen"));
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
         user.setPassword("daiveekam");
         user.setId(ulid.toString());
         return userRepository.save(user);
