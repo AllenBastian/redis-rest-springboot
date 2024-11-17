@@ -32,14 +32,14 @@ public class LoginController {
         System.out.println(loginRequest.getUsername());
         System.out.println(loginRequest.getPassword());
 
-//        Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
-//                loginRequest.getUsername(),loginRequest.getPassword()
-//        );
+        Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
+                loginRequest.getUsername(),loginRequest.getPassword()
+        );
 
-//        System.out.println(authenticationRequest.isAuthenticated());
-//        System.out.println(authenticationRequest.getCredentials());
+        System.out.println(authenticationRequest.isAuthenticated());
+        System.out.println(authenticationRequest.getCredentials());
 
-//        Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
+        Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
 
     }
 }
