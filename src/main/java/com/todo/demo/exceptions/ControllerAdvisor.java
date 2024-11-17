@@ -6,9 +6,11 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.net.BindException;
 import java.util.ArrayList;
 
 
@@ -26,5 +28,21 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);
 
     }
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<String>> handleMethodViolationException(MethodArgumentNotValidException exception){
+
+        //converts set of errors received from exception into array to get the first error
+        System.out.println("skskskksksksksk");
+        String errorMessage = exception.getBindingResult().getAllErrors().getFirst().getDefaultMessage();
+        ApiResponse<String> myResponse = new ApiResponse<>("constraint validation error",errorMessage);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);
+
+    }
+
+
+
+
 
 }

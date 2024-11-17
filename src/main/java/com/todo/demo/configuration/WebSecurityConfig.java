@@ -25,27 +25,29 @@ public class WebSecurityConfig  {
     @Autowired
     private UserDetailsService myUserDetailsService;
 
+
+
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((request)->
-                request.requestMatchers("/api/login").
-                        permitAll().anyRequest().authenticated());
+                request.requestMatchers("/api/auth/login").
+                        permitAll().anyRequest().permitAll());
         http.csrf(customizer->customizer.disable());
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(UserDetailsService myUserDetailsService){
+    public AuthenticationManager authenticationManager(){
 
         DaoAuthenticationProvider myAuthProvider = new DaoAuthenticationProvider();
-        myAuthProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+        myAuthProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         myAuthProvider.setUserDetailsService(myUserDetailsService);
+        myAuthProvider.setHideUserNotFoundExceptions(false);
 
         return new ProviderManager(myAuthProvider);
 
     }
-
 
 
 
