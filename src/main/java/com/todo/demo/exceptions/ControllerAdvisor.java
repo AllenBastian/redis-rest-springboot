@@ -35,7 +35,7 @@ public class ControllerAdvisor {
     public ResponseEntity<ApiResponse<String>> handleMethodViolationException(MethodArgumentNotValidException exception){
 
         //converts set of errors received from exception into array to get the first error
-        System.out.println("skskskksksksksk");
+
         String errorMessage = exception.getBindingResult().getAllErrors().getFirst().getDefaultMessage();
         ApiResponse<String> myResponse = new ApiResponse<>("constraint validation error",errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);
@@ -47,7 +47,6 @@ public class ControllerAdvisor {
     public ResponseEntity<ApiResponse<String>> handleUsernameNotFoundException(UsernameNotFoundException exception){
 
         //converts set of errors received from exception into array to get the first error
-        System.out.println("skskskksksksksk");
         String errorMessage = exception.getMessage();
         ApiResponse<String> myResponse = new ApiResponse<>("Username not found",errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(myResponse);

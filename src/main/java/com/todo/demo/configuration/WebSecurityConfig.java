@@ -21,7 +21,7 @@ public class WebSecurityConfig  {
     private UserDetailsService userDetailsService;
 
 
-
+    //configuring the filter of http requests
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
@@ -32,11 +32,19 @@ public class WebSecurityConfig  {
         return http.build();
     }
 
+
+    //returns Authentication Manager implementation Provider Manager which will check for different auth providers
     @Bean
     public AuthenticationManager authenticationManager(){
 
+        //using data access object provider
+
         DaoAuthenticationProvider myAuthProvider = new DaoAuthenticationProvider();
+
+        //setting the type of password encoder to the provider
         myAuthProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+
+        //setting the service class for getting principal info
         myAuthProvider.setUserDetailsService(userDetailsService);
         return new ProviderManager(myAuthProvider);
 

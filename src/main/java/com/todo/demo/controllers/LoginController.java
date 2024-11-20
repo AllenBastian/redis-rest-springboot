@@ -29,15 +29,13 @@ public class LoginController {
     @PostMapping(path = "/login")
     public void loginController(@Valid @RequestBody LoginRequest loginRequest){
 
-        System.out.println(loginRequest.getUsername());
-        System.out.println(loginRequest.getPassword());
-
+        //create an unauthenticated object of user-pass auth
         Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
                 loginRequest.getUsername(),loginRequest.getPassword()
         );
 
-        System.out.println(authenticationRequest.isAuthenticated());
-        System.out.println(authenticationRequest.getCredentials());
+
+        //use the authenticationManager bean in security config to authenticate request
 
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
 
