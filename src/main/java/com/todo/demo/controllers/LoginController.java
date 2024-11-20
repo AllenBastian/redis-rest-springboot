@@ -35,7 +35,9 @@ public class LoginController {
         );
 
 
-        //use the authenticationManager bean in security config to authenticate request
+        /*use the authenticationManager bean in security config to authenticate request
+        This bean have been provided with DAO auth provider and other services
+         */
 
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
 
