@@ -46,8 +46,11 @@ public class LoginController {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authenticationResponse);
 
-        // Save the SecurityContext in the session
+        /* Save the SecurityContext in the session (in-memory store default)
+           When Subsequent request comes it fetches the security context using sessionID and validates
+         */
         securityContextRepository.saveContext(context, request, response);
+        System.out.println(request.getSession().getId());
         System.out.println("hello world, you have logged in!");
     }
 
