@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+
+
 //user details by overriding loadByUsername using the userRepository
 @Service
 public class MyUserDetailsService implements UserDetailsService {
