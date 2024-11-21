@@ -39,7 +39,7 @@ public class LoginController {
                 loginRequest.getUsername(), loginRequest.getPassword()
         );
 
-        // Authenticate the request
+        // Authenticate the request using auth manager(all beans required in webSecurityConfig
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
 
         // Create and set the SecurityContext
