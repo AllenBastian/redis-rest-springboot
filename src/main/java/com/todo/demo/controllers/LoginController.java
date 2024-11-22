@@ -3,6 +3,7 @@ package com.todo.demo.controllers;
 import com.todo.demo.http.request.LoginRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,6 +44,11 @@ public class LoginController {
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authenticationResponse);
+
+        //sets info required for subsequent requests
+        HttpSession session = request.getSession();
+
+        session.setAttribute("username", authenticationResponse.getName());
         securityContextRepository.saveContext(context,request,response);
 
     }

@@ -4,6 +4,7 @@ package com.todo.demo.controllers;
 import com.todo.demo.entities.TodoList;
 import com.todo.demo.http.response.ApiResponse;
 import com.todo.demo.services.CrudService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,10 @@ public class CrudController {
 
 
     @GetMapping("/get-all")
-    public ResponseEntity<ApiResponse<List<TodoList>>>getAllTodos(){
+    public ResponseEntity<ApiResponse<List<TodoList>>>getAllTodos(HttpServletRequest request){
+
+        System.out.println(request.getSession().getAttribute("username"));
+        System.out.println(request.getSession().getId());
 
         List<TodoList>myTodo = crudService.getAllTodoLists();
         ApiResponse<List<TodoList>> myResponse = new ApiResponse<>("success",myTodo);
