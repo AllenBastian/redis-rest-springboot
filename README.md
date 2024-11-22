@@ -1,4 +1,4 @@
-# **Spring Boot Authentication with Redis Session Management**
+# **Spring Boot Authentication with Redis Session Management at an REST endpoint**
 
 This project demonstrates two implementations of session management in a Spring Boot application:
 
