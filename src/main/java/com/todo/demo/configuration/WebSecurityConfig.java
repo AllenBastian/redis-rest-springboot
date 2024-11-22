@@ -31,6 +31,7 @@ public class WebSecurityConfig  {
                         permitAll().anyRequest().authenticated());
         http.csrf(customizer->customizer.disable());
         http.httpBasic(customizer->customizer.disable());
+        http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
         return http.build();
     }

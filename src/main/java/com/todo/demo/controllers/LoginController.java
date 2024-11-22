@@ -41,7 +41,9 @@ public class LoginController {
 
 
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
-        SecurityContextHolder.getContext().setAuthentication(authenticationResponse);
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authenticationResponse);
+        securityContextRepository.saveContext(context,request,response);
 
     }
 
