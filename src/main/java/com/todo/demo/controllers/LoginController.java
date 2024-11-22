@@ -42,6 +42,7 @@ public class LoginController {
 
         Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
         SecurityContextHolder.getContext().setAuthentication(authenticationResponse);
+
     }
 
 
